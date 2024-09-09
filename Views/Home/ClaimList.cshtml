@@ -1,0 +1,36 @@
+﻿@model IEnumerable<LecturerClaimSystem.Models.Claim>
+
+<h2>All Claims</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lecturer Name</th>
+            <th>Status</th>
+            <th>Verified By</th>
+            <th>Approved By</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.LecturerName @claim.LecturerSurname</td>
+                <td>@claim.Status</td>
+                <td>@claim.VerifiedBy</td>
+                <td>@claim.ApprovedBy</td>
+                <td>
+                    @if (claim.Status == "Pending")
+                    {
+                        <a href="@Url.Action("VerifyClaim", "Home", new { id = claim.Id })" class="btn btn-primary">Verify</a>
+                    }
+                    else if (claim.Status == "Verified")
+                    {
+                        <a href="@Url.Action("ApproveClaim", "Home", new { id = claim.Id })" class="btn btn-success">Approve</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

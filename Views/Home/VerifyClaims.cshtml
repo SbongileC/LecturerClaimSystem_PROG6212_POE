@@ -1,0 +1,34 @@
+﻿@model IEnumerable<LecturerClaimSystem.Models.Claim>
+
+<h2>Claims Pending Verification</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lecturer Name</th>
+            <th>Modules</th>
+            <th>Date Submitted</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.LecturerName @claim.LecturerSurname</td>
+                <td>
+                    <ul>
+                        @foreach (var module in claim.Modules)
+                        {
+                            <li>@module.ModuleName</li>
+                        }
+                    </ul>
+                </td>
+                <td>@claim.DateSubmitted.ToString("dd MMM yyyy")</td>
+                <td>
+                    <a href="@Url.Action("VerifyClaim", "Home", new { id = claim.Id })" class="btn btn-primary">Verify</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
