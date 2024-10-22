@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<LecturerClaimSystem.Models.Claim>
 
+    <!--Manager and Coodinator view to verify, approve or reject claim-->
 <h2>All Claims</h2>
 
 <table class="table">
@@ -24,7 +25,7 @@
                 {
                 <span>No document uploaded</span>
                 }
-    </td>
+                </td>
 
             <tr>
                 <td>@claim.LecturerName @claim.LecturerSurname</td>
