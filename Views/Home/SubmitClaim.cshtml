@@ -4,48 +4,57 @@
 
 <form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
     <div>
-        <label for="LecturerName">Lecturer Name</label>
-        <input type="text" id="LecturerName" name="LecturerName" required />
+        <label for="LecturerName">Lecturer Name: </label>
+        <input type="text" id="LecturerName" name="LecturerName" required class="form-control" />
     </div>
     <div>
-        <label for="LecturerSurname">Lecturer Surname</label>
-        <input type="text" id="LecturerSurname" name="LecturerSurname" required />
+        <label for="LecturerSurname">Lecturer Surname: </label>
+        <input type="text" id="LecturerSurname" name="LecturerSurname" required class="form-control" />
     </div>
     <div>
-        <label for="EmployeeNumber">Employee Number</label>
-        <input type="text" id="EmployeeNumber" name="EmployeeNumber" required />
+        <label for="EmployeeNumber">Employee Number: </label>
+        <input type="text" id="EmployeeNumber" name="EmployeeNumber" required class="form-control" />
     </div>
     <div>
-        <label for="ContactDetails">Contact Details</label>
-        <input type="text" id="ContactDetails" name="ContactDetails" required />
+        <label for="ContactDetails">Contact Details: </label>
+        <input type="text" id="ContactDetails" name="ContactDetails" required class="form-control" />
     </div>
 
     <!-- File upload for supporting documents -->
     <div>
-        <label for="SupportingDocument">Supporting Document</label>
-        <input type="file" id="SupportingDocument" name="SupportingDocument" accept=".pdf,.jpg,.png,.docx" required />
+        <label for="SupportingDocument">Supporting Document: </label>
+        <input type="file" id="SupportingDocument" name="SupportingDocument" accept=".pdf,.jpg,.png,.docx" required class="form-control" />
+        <small class="text-muted">Allowed formats: PDF, JPG, PNG, DOCX</small>
     </div>
 
-    <br><br/>
+    <br /><br />
+
+    <!-- Field for Additional Notes -->
+    <div>
+        <label for="AdditionalNotes">Additional Notes: </label>
+        <textarea id="AdditionalNotes" name="AdditionalNotes" rows="4" class="form-control"></textarea>
+    </div>
+
+    <br /><br />
 
     <h2>Modules</h2>
     <div id="module-container">
         <div class="module-group">
             <h4>Module 1</h4>
             <div>
-                <label>Module Name</label>
+                <label>Module Name: </label>
                 <input name="Modules[0].ModuleName" class="form-control" />
             </div>
             <div>
-                <label>Programme</label>
+                <label>Programme: </label>
                 <input name="Modules[0].Programme" class="form-control" />
             </div>
             <div>
-                <label>Number of Hours</label>
+                <label>Number of Hours: </label>
                 <input name="Modules[0].NumberOfHours" class="form-control" />
             </div>
             <div>
-                <label>Hourly Rate</label>
+                <label>Hourly Rate: </label>
                 <input name="Modules[0].HourlyRate" class="form-control" />
             </div>
         </div>
@@ -56,36 +65,36 @@
 </form>
 
 @section Scripts {
-    <script>
-        let moduleCount = 1;
+        <script>
+            let moduleCount = 1;
 
-        document.getElementById('add-module-btn').addEventListener('click', function () {
-            moduleCount++;
-            const moduleContainer = document.getElementById('module-container');
+            document.getElementById('add-module-btn').addEventListener('click', function () {
+                moduleCount++;
+                const moduleContainer = document.getElementById('module-container');
 
-            const moduleGroup = document.createElement('div');
-            moduleGroup.className = 'module-group';
-            moduleGroup.innerHTML = `
-                        <h4>Module ${moduleCount}</h4>
-                        <div>
-                            <label>Module Name</label>
-                            <input name="Modules[${moduleCount - 1}].ModuleName" class="form-control" />
-                        </div>
-                        <div>
-                            <label>Programme</label>
-                            <input name="Modules[${moduleCount - 1}].Programme" class="form-control" />
-                        </div>
-                        <div>
-                            <label>Number of Hours</label>
-                            <input name="Modules[${moduleCount - 1}].NumberOfHours" class="form-control" />
-                        </div>
-                        <div>
-                            <label>Hourly Rate</label>
-                            <input name="Modules[${moduleCount - 1}].HourlyRate" class="form-control" />
-                        </div>
-                    `;
+                const moduleGroup = document.createElement('div');
+                moduleGroup.className = 'module-group';
+                moduleGroup.innerHTML = `
+                    <h4>Module ${moduleCount}</h4>
+                    <div>
+                        <label>Module Name</label>
+                        <input name="Modules[${moduleCount - 1}].ModuleName" class="form-control" />
+                    </div>
+                    <div>
+                        <label>Programme</label>
+                        <input name="Modules[${moduleCount - 1}].Programme" class="form-control" />
+                    </div>
+                    <div>
+                        <label>Number of Hours</label>
+                        <input name="Modules[${moduleCount - 1}].NumberOfHours" class="form-control" />
+                    </div>
+                    <div>
+                        <label>Hourly Rate</label>
+                        <input name="Modules[${moduleCount - 1}].HourlyRate" class="form-control" />
+                    </div>
+                `;
 
-            moduleContainer.appendChild(moduleGroup);
-        });
-    </script>
+                moduleContainer.appendChild(moduleGroup);
+            });
+        </script>
 }

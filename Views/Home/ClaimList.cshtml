@@ -15,21 +15,40 @@
     <tbody>
         @foreach (var claim in Model)
         {
+                <td>
+                @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                {
+                <a href="@claim.SupportingDocumentPath" target="_blank">View Document</a>
+                }
+                else
+                {
+                <span>No document uploaded</span>
+                }
+    </td>
+
             <tr>
                 <td>@claim.LecturerName @claim.LecturerSurname</td>
                 <td>@claim.Status</td>
                 <td>@claim.VerifiedBy</td>
                 <td>@claim.ApprovedBy</td>
                 <td>
+                    @if (claim.Status == "Rejected")
+                    {
+                        <p><strong>Rejection Reason:</strong> @claim.RejectionReason</p>
+                    }
+
                     @if (claim.Status == "Pending")
                     {
                         <a href="@Url.Action("VerifyClaim", "Home", new { id = claim.Id })" class="btn btn-primary">Verify</a>
+                        <a href="@Url.Action("RejectClaim", "Home", new { id = claim.Id })" class="btn btn-danger">Reject</a>
                     }
                     else if (claim.Status == "Verified")
                     {
                         <a href="@Url.Action("ApproveClaim", "Home", new { id = claim.Id })" class="btn btn-success">Approve</a>
+                        <a href="@Url.Action("RejectClaim", "Home", new { id = claim.Id })" class="btn btn-danger">Reject</a>
                     }
                 </td>
+
             </tr>
         }
     </tbody>

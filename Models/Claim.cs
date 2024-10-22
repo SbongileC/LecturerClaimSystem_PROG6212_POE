@@ -14,19 +14,12 @@ namespace LecturerClaimSystem.Models
         public string SupportingDocumentPath { get; set; }
 
         // For status tracking
-        public string Status { get; set; }  // Pending, Verified, Approved
+        public string Status { get; set; }  // Shows whether the claim is Pending, Verified or Approved
         public string VerifiedBy { get; set; }
         public string ApprovedBy { get; set; }
+        public string AdditionalNotes { get; set; }
+        public string RejectionReason { get; set; }
     }
 }
 
-namespace LecturerClaimSystem.Models
-{
-    public class Module
-    {
-        public int Id { get; set; }
-        public string ModuleCode { get; set; }
-        public string ModuleName { get; set; }
-        public int Credits { get; set; }
-    }
-}
+
