@@ -4,6 +4,7 @@ namespace LecturerClaimSystem.Models
 {
     public class Claim
     {
+        //For the Claim submission form
         public int Id { get; set; }
         public string LecturerName { get; set; }
         public string LecturerSurname { get; set; }
