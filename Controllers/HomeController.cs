@@ -61,11 +61,11 @@ namespace LecturerClaimSystem.Controllers
                     SupportingDocument.CopyTo(stream);
                 }
 
-                // Store the file path in the claim (relative path for serving the file)
+                // Store the file path in the claim 
                 claim.SupportingDocumentPath = $"/uploads/{fileName}";
             }
 
-            // Add additional claim processing here
+            // Additional claim processing 
             claim.Status = "Pending";
             claim.DateSubmitted = DateTime.Now;
             claim.Id = claims.Count > 0 ? claims.Max(c => c.Id) + 1 : 1;
@@ -74,7 +74,6 @@ namespace LecturerClaimSystem.Controllers
 
             return RedirectToAction("ClaimSubmitted");
         }
-
 
         public IActionResult VerifyClaim(int id)
         {
@@ -98,37 +97,35 @@ namespace LecturerClaimSystem.Controllers
         }
 
         public IActionResult RejectClaim(int id)
-{
-    var claim = claims.FirstOrDefault(c => c.Id == id);
+        {
+         var claim = claims.FirstOrDefault(c => c.Id == id);
 
-    if (claim == null || claim.Status == "Approved")
-    {
+        if (claim == null || claim.Status == "Approved")
+        {
         // Handle invalid claim or already approved claim
         return RedirectToAction("Error");
-    }
+        }
 
-    return View(claim); // Render the reject view with the claim details
-}
+        return View(claim); // Render the reject view with the claim details
+        }
 
-[HttpPost]
-public IActionResult RejectClaim(int id, string rejectionReason)
-{
-    var claim = claims.FirstOrDefault(c => c.Id == id);
+        [HttpPost]
+        public IActionResult RejectClaim(int id, string rejectionReason)
+        {
+         var claim = claims.FirstOrDefault(c => c.Id == id);
 
-    if (claim == null || claim.Status == "Approved")
-    {
+        if (claim == null || claim.Status == "Approved")
+        {
         // Handle invalid claim or already approved claim
         return RedirectToAction("Error");
-    }
+        }
 
-    // Reject the claim
-    claim.Status = "Rejected";
-    claim.RejectionReason = rejectionReason;
+        // Reject the claim
+        claim.Status = "Rejected";
+        claim.RejectionReason = rejectionReason;
 
-    return RedirectToAction("ClaimList");
-}
-
-
+        return RedirectToAction("ClaimList");
+        }
 
         public IActionResult ApproveClaim(int id)
         {
