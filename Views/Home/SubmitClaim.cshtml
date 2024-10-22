@@ -1,5 +1,6 @@
 ﻿@model LecturerClaimSystem.Models.Claim
 
+<!--Lecturer claim submission  form-->
 <h2>Submit your Claim</h2>
 
 <form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
@@ -50,7 +51,7 @@
                 <input name="Modules[0].Programme" class="form-control" />
             </div>
             <div>
-                <label>Number of Hours: </label>
+                <label>Hours worked: </label>
                 <input name="Modules[0].NumberOfHours" class="form-control" />
             </div>
             <div>
