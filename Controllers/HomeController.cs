@@ -65,6 +65,17 @@ namespace LecturerClaimSystem.Controllers
                 claim.SupportingDocumentPath = $"/uploads/{fileName}";
             }
 
+            // Auto-calculate the total payment
+            if (claim.Modules != null && claim.Modules.Any())
+            {
+                claim.TotalPayment = claim.Modules.Sum(m => m.Payment);
+            }
+            else
+            {
+                ModelState.AddModelError("", "At least one module must be added.");
+                return View(claim);
+            }
+
             // Additional claim processing 
             claim.Status = "Pending";
             claim.DateSubmitted = DateTime.Now;

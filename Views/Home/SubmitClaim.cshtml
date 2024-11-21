@@ -38,64 +38,115 @@
 
     <br /><br />
 
-    <h2>Modules</h2>
+    h2>Modules</h2>
     <div id="module-container">
         <div class="module-group">
             <h4>Module 1</h4>
             <div>
                 <label>Module Name: </label>
-                <input name="Modules[0].ModuleName" class="form-control" />
+                <input name="Modules[0].ModuleName" class="form-control" required />
             </div>
             <div>
                 <label>Programme: </label>
-                <input name="Modules[0].Programme" class="form-control" />
+                <input name="Modules[0].Programme" class="form-control" required />
             </div>
             <div>
                 <label>Hours worked: </label>
-                <input name="Modules[0].NumberOfHours" class="form-control" />
+                <input name="Modules[0].NumberOfHours" class="form-control number-of-hours" required />
             </div>
             <div>
                 <label>Hourly Rate: </label>
-                <input name="Modules[0].HourlyRate" class="form-control" />
+                <input name="Modules[0].HourlyRate" class="form-control hourly-rate" required />
+            </div>
+            <div>
+                <label>Payment (auto-calculated)</label>
+                <input name="Modules[0].Payment" class="form-control module-payment" readonly />
             </div>
         </div>
     </div>
 
     <button type="button" class="btn btn-secondary" id="add-module-btn">Add Another Module</button>
+
+    <br /><br />
+
+    <div>
+        <label>Total Payment</label>
+        <input id="total-payment" name="TotalPayment" class="form-control" readonly />
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit Claim</button>
 </form>
 
-@section Scripts {
-        <script>
-            let moduleCount = 1;
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to calculate and update payments
+        const calculateTotalPayment = () => {
+            let totalPayment = 0;
 
-            document.getElementById('add-module-btn').addEventListener('click', function () {
-                moduleCount++;
-                const moduleContainer = document.getElementById('module-container');
+            // Iterate through each module group
+            document.querySelectorAll(".module-group").forEach((group) => {
+                const hoursInput = group.querySelector(".number-of-hours");
+                const rateInput = group.querySelector(".hourly-rate");
+                const paymentField = group.querySelector(".module-payment");
 
-                const moduleGroup = document.createElement('div');
-                moduleGroup.className = 'module-group';
-                moduleGroup.innerHTML = `
-                    <h4>Module ${moduleCount}</h4>
+                // Get input values
+                const hours = parseFloat(hoursInput.value) || 0;
+                const rate = parseFloat(rateInput.value) || 0;
+
+                // Calculate module payment
+                const payment = hours * rate;
+
+                // Update payment field
+                paymentField.value = payment.toFixed(2);
+
+                // Add to total payment
+                totalPayment += payment;
+            });
+
+            // Update total payment field
+            document.getElementById("total-payment").value = totalPayment.toFixed(2);
+        };
+
+        // Attach input event listeners for dynamic updates
+        document.getElementById("module-container").addEventListener("input", calculateTotalPayment);
+
+        // Function to add a new module dynamically
+        document.getElementById("add-module-btn").addEventListener("click", function () {
+            const moduleCount = document.querySelectorAll(".module-group").length;
+
+            const newModule = `
+                <div class="module-group">
+                    <h4>Module ${moduleCount + 1}</h4>
                     <div>
                         <label>Module Name</label>
-                        <input name="Modules[${moduleCount - 1}].ModuleName" class="form-control" />
+                        <input name="Modules[${moduleCount}].ModuleName" class="form-control" required />
                     </div>
                     <div>
                         <label>Programme</label>
-                        <input name="Modules[${moduleCount - 1}].Programme" class="form-control" />
+                        <input name="Modules[${moduleCount}].Programme" class="form-control" required />
                     </div>
                     <div>
                         <label>Number of Hours</label>
-                        <input name="Modules[${moduleCount - 1}].NumberOfHours" class="form-control" />
+                        <input name="Modules[${moduleCount}].NumberOfHours" class="form-control number-of-hours" required />
                     </div>
                     <div>
                         <label>Hourly Rate</label>
-                        <input name="Modules[${moduleCount - 1}].HourlyRate" class="form-control" />
+                        <input name="Modules[${moduleCount}].HourlyRate" class="form-control hourly-rate" required />
                     </div>
-                `;
+                    <div>
+                        <label>Payment (auto-calculated)</label>
+                        <input name="Modules[${moduleCount}].Payment" class="form-control module-payment" readonly />
+                    </div>
+                </div>
+            `;
 
-                moduleContainer.appendChild(moduleGroup);
-            });
-        </script>
-}
+            // Add the new module to the container
+            document.getElementById("module-container").insertAdjacentHTML("beforeend", newModule);
+        });
+
+        // Perform initial calculation
+        calculateTotalPayment();
+    });
+</script>
+
+

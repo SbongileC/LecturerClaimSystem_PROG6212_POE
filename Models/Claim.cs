@@ -20,6 +20,10 @@ namespace LecturerClaimSystem.Models
         public string ApprovedBy { get; set; }
         public string AdditionalNotes { get; set; }
         public string RejectionReason { get; set; }
+        public decimal TotalPayment { get; set; }
+        public int HoursWorked { get; internal set; }
+        public bool IsApproved { get; internal set; }
+        public int HourlyRate { get; internal set; }
     }
 }
 
