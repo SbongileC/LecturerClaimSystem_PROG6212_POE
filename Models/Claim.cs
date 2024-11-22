@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using LecturerClaimSystem.Models;
-namespace LecturerClaimSystem.Models
+﻿namespace LecturerClaimSystem.Models
 {
     public class Claim
     {
