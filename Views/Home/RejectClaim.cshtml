@@ -8,11 +8,14 @@
 </p>
 
 <form asp-action="RejectClaim" method="post">
+
     <div class="form-group">
         <label for="RejectionReason">Reason for Rejection</label>
         <textarea id="RejectionReason" name="rejectionReason" rows="4" class="form-control" required></textarea>
     </div>
 
     <button type="submit" class="btn btn-danger">Reject Claim</button>
+
     <a href="@Url.Action("ClaimList", "Home")" class="btn btn-secondary">Cancel</a>
+
 </form>
