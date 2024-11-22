@@ -30,7 +30,7 @@ namespace LecturerClaimSystem.Controllers
         {
             if (SupportingDocument != null && SupportingDocument.Length > 0)
             {
-                // Ensure the file extension is valid
+                // Ensures the file extension is valid
                 var validExtensions = new[] { ".pdf", ".jpg", ".png", ".docx" };
                 var extension = Path.GetExtension(SupportingDocument.FileName).ToLowerInvariant();
 
@@ -44,7 +44,7 @@ namespace LecturerClaimSystem.Controllers
                 var fileName = $"{Guid.NewGuid()}{extension}";
                 var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
 
-                // Ensure the directory exists
+                // Ensures the directory exists
                 if (!Directory.Exists(uploadsPath))
                 {
                     Directory.CreateDirectory(uploadsPath);
@@ -52,7 +52,7 @@ namespace LecturerClaimSystem.Controllers
 
                 var filePath = Path.Combine(uploadsPath, fileName);
 
-                // Save the file
+                // Saves the file
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     SupportingDocument.CopyTo(stream);
