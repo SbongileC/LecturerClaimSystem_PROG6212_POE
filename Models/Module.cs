@@ -8,6 +8,7 @@
         public string ModuleName { get; set; }
         public string Programme { get; set; }
         public int NumberOfHOurs { get; set; }
+        public int NumberOfHours { get; internal set; }
         public decimal HourlyRate { get; set; }
 
         // Computed property for the payment of a single module
