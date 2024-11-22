@@ -10,9 +10,7 @@
         public int NumberOfHOurs { get; set; }
         public int NumberOfHours { get; internal set; }
         public decimal HourlyRate { get; set; }
-
-        // Computed property for the payment of a single module
-        public decimal Payment => NumberOfHOurs * HourlyRate;
+        public decimal Payment => NumberOfHOurs * HourlyRate; // Computed property for the payment of a single module
 
     }
 }
